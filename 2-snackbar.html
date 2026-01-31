@@ -21,24 +21,24 @@
         </h1>
         
         <form class="form">
-          <label>
+          <label class="form-label">
             Delay (ms)
-            <input type="number" name="delay" required />
+            <input class="form-input" type="number" name="delay" required />
           </label>
           
-          <fieldset>
-            <legend>State</legend>
-            <label>
-              <input type="radio" name="state" value="fulfilled" required />
+          <fieldset class="form-fieldset">
+            <legend class="form-legend">State</legend>
+            <label class="form-label">
+              <input class="form-input" type="radio" name="state" value="fulfilled" required />
               Fulfilled
             </label>
-            <label>
-              <input type="radio" name="state" value="rejected" required />
+            <label class="form-label">
+              <input class="form-input" type="radio" name="state" value="rejected" required />
               Rejected
             </label>
           </fieldset>
           
-          <button type="submit">Create notification</button>
+          <button type="submit" class="btn">Create notification</button>
         </form>
 
       </div>
