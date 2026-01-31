@@ -8,13 +8,40 @@ import iziToast from "izitoast";
 // Додатковий імпорт стилів
 import "izitoast/dist/css/iziToast.min.css";
 
-const dateTimePicker = document.querySelector('#datetime-picker');
+// Elements
+const inputPicker = document.querySelector('#datetime-picker');
 const startBtn = document.querySelector('[data-start]');
-const daysEl = document.querySelector('[data-days]');
-const hoursEl = document.querySelector('[data-hours]');
-const minutesEl = document.querySelector('[data-minutes]');
-const secondsEl = document.querySelector('[data-seconds]');
+const daysValue = document.querySelector('[data-days]');
+const hoursValue = document.querySelector('[data-hours]');
+const minutesValue = document.querySelector('[data-minutes]');
+const secondsValue = document.querySelector('[data-seconds]');
 
+let userSelectedDate = null;
+let timerId = null;
+
+// Flatpickr
+const options = {
+  enableTime: true,
+  time_24hr: true,
+  defaultDate: new Date(),
+  minuteIncrement: 1,
+  onClose(selectedDates) {
+    userSelectedDate = selectedDates[0];
+
+    if (userSelectedDate < new Date()) {
+      iziToast.error({
+        title: 'Error',
+        message: 'Please choose a date in the future',
+        position: 'topRight',
+      });
+      startBtn.disabled = true;
+    } else {
+      startBtn.disabled = false;
+    }
+  },
+};
+
+flatpickr(inputPicker, options);
 
 
 function convertMs(ms) {
