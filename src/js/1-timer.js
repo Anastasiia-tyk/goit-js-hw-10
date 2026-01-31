@@ -43,6 +43,37 @@ const options = {
 
 flatpickr(inputPicker, options);
 
+// Button Start
+startBtn.addEventListener('click', () => {
+  startBtn.disabled = true;
+  inputPicker.disabled = true;
+
+  timerId = setInterval(() => {
+    const currentTime = Date.now();
+    const deltaTime = userSelectedDate - currentTime;
+
+    if (deltaTime <= 0) {
+      clearInterval(timerId);
+      updateTimer(convertMs(0));
+      inputPicker.disabled = false;
+      return;
+    }
+
+    const timeComponents = convertMs(deltaTime);
+    updateTimer(timeComponents);
+  }, 1000);
+});
+
+function addLeadingZero(value) {
+  return String(value).padStart(2, '0');
+}
+
+function updateTimer({ days, hours, minutes, seconds }) {
+  daysValue.textContent = addLeadingZero(days);
+  hoursValue.textContent = addLeadingZero(hours);
+  minutesValue.textContent = addLeadingZero(minutes);
+  secondsValue.textContent = addLeadingZero(seconds);
+}
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time
