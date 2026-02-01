@@ -16,6 +16,9 @@ const hoursValue = document.querySelector('[data-hours]');
 const minutesValue = document.querySelector('[data-minutes]');
 const secondsValue = document.querySelector('[data-seconds]');
 
+// Button Start - disabled
+startBtn.disabled = true;
+
 let userSelectedDate = null;
 let timerId = null;
 
@@ -28,7 +31,7 @@ const options = {
   onClose(selectedDates) {
     userSelectedDate = selectedDates[0];
 
-    if (userSelectedDate < new Date()) {
+    if (userSelectedDate <= new Date()) {
       iziToast.error({
         title: 'Error',
         titleColor: '#FFFFFF',
@@ -63,8 +66,7 @@ startBtn.addEventListener('click', () => {
       return;
     }
 
-    const timeComponents = convertMs(deltaTime);
-    updateTimer(timeComponents);
+    updateTimer(convertMs(deltaTime));
   }, 1000);
 });
 
